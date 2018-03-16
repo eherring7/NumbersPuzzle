@@ -77,18 +77,19 @@ void FindMagicNumber()
    string finalString, finalWord;
    deque<numWords>::const_iterator i, j, a;
 
+   cout << "Finding Magic Number" << endl;
    // Loop through the Millions deque to count all the characters and numbers
    for(i = numMillion.begin(); i != numMillion.end(); i++)
    {
       finalString = (*i).numWord;
       // Check the prefix of the number word and count the characters and numbers accordingly
-      if(num = CheckNumber(finalString, MILLION))
+      if((num = CheckNumber(finalString, MILLION)))
       {
          totalCharCount += num;
          numberHold = (*i).numDigit + ((*i).numDigit * 999999) + TOTALTHOUSANDS;
          numberCount += numberHold;
       }
-      else if(num = CheckNumber(finalString, THOUSAND))
+      else if((num = CheckNumber(finalString, THOUSAND)))
       {
          totalCharCount += num;
          numberHold = ((*i).numDigit * 1000) + TOTALONES;
@@ -142,6 +143,11 @@ void FindMagicNumber()
                      // Check to see if we have reached the Magic Number
                      if(totalCharCount >= MAGICNUMBER)
                      {
+                        string word = finalWord + (*j).numWord + (*a).numWord;
+                        int countFinalWord = word.size();
+                        int over = totalCharCount - MAGICNUMBER;
+                        cout << "51 billionth letter is: " << word.at(countFinalWord - over - 1) << endl;
+                        cout << "Final Word Count: " << countFinalWord << endl;
                         cout << "Total Char Count = " << totalCharCount << endl;
                         cout << "Full Number is: " << finalWord + (*j).numWord + (*a).numWord << endl;
                         cout << "Digits added up is: " << numberCount << endl;
@@ -197,6 +203,8 @@ int main(int argc, char *argv[])
    string joinWords;
    long digit[10];
    long number;
+
+   cout << "Starting Program" << endl;
    
    // Loop through the first 1000 numbers to build our base
    for(int x = 1; x < 1000; x++)
